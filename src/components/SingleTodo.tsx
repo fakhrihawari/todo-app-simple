@@ -1,67 +1,47 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { MdDone, MdRemoveDone } from "react-icons/md";
-import TodoContext from "../todo.context";
-import { TodoContextType } from "../models/todo.context.type";
+// import TodoContext from "../todo.context";
+// import { TodoContextType } from "../models/todo.context.type";
 import { Todo } from "../models/todo.model";
 import db from "../firebase";
 type singleTodoProp = {
   todo: Todo;
 };
 const SingleTodo = ({ todo }: singleTodoProp) => {
-  const { state, dispatch } = useContext(TodoContext) as TodoContextType;
+  // const { state, dispatch } = useContext(TodoContext) as TodoContextType;
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>("");
 
   const setTaskToDone = (id: number) => {
     // using reducer
-    var jobskill_query = db.collection("todo").where("id", "==", id);
-    jobskill_query.get().then(function (querySnapshot) {
+    var todo_query = db.collection("todo").where("id", "==", id);
+    todo_query.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         doc.ref.update({ isDone: !todo.isDone });
       });
     });
 
-    // dispatch({
-    //   type: "SET_TODOS",
-    //   payload: [
-    //     ...state.todos.map((todo) => {
-    //       return todo.id === id ? { ...todo, isDone: !todo.isDone } : todo;
-    //     }),
-    //   ],
-    // });
   };
 
   const deleteTask = async (id: number) => {
     // using reducer
-    var jobskill_query = db.collection("todo").where("id", "==", id);
-    jobskill_query.get().then(function (querySnapshot) {
+    var todo_query = db.collection("todo").where("id", "==", id);
+    todo_query.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         doc.ref.delete();
       });
     });
-    // dispatch({
-    //   type: "SET_TODOS",
-    //   payload: [...state.todos.filter((todo) => todo.id !== id)],
-    // });
   };
 
   const editTask = (id: number) => {
     // using reducer
-    var jobskill_query = db.collection("todo").where("id", "==", id);
-    jobskill_query.get().then(function (querySnapshot) {
+    var todo_query = db.collection("todo").where("id", "==", id);
+    todo_query.get().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
         doc.ref.update({ todo: editTodo });
       });
     });
-    // dispatch({
-    //   type: "SET_TODOS",
-    //   payload: [
-    //     ...state.todos.map((todo) => {
-    //       return todo.id === id ? { ...todo, todo: editTodo } : todo;
-    //     }),
-    //   ],
-    // });
     setEdit(false);
   };
   const inputRef = useRef<HTMLInputElement>(null);

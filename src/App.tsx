@@ -10,21 +10,7 @@ import db from "./firebase";
 import { Todo } from "./models/todo.model";
 
 function App() {
-  const [state, dispatch] = useReducer(TodoReducer, initialStateReducer);
-  // const handleAdd = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (state.todo) {
-  //     dispatch({
-  //       type: "SET_TODOS",
-  //       payload: [
-  //         ...state.todos,
-  //         { id: Date.now(), todo: state.todo, isDone: false },
-  //       ],
-  //     });
-  //     dispatch({ type: "SET_TODO", payload: "" });
-  //   }
-  // };
-  
+  const [state, dispatch] = useReducer(TodoReducer, initialStateReducer);  
   useEffect(() => {
          
     if (state.user.username) {
