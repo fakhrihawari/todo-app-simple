@@ -12,7 +12,7 @@ const InputField = () => {
 
   return (
     <div className='input__container'>
-        <input value={state.todo} onChange={(e)=>dispatch({type:'SET_TODO',payload:e.target.value})} type="text" placeholder='Put your task '  className='input__text'/>
+        <input ref={inputRef} value={state.todo} onChange={(e)=>dispatch({type:'SET_TODO',payload:e.target.value})} type="text" placeholder='Put your task '  className='input__text'/>
         <button className='input__button' onClick={()=>{
           addFirestore()
           dispatch({type:'ADD_TODO',payload:state.todo});
