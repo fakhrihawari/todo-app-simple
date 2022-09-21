@@ -12,7 +12,6 @@ import { Todo } from "./models/todo.model";
 function App() {
   const [state, dispatch] = useReducer(TodoReducer, initialStateReducer);  
   useEffect(() => {
-         
     if (state.user.username) {
       db.collection("todo").onSnapshot((snapshot) => {
         let _todosfetch: Todo[] = [];  

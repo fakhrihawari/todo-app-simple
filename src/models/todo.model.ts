@@ -7,5 +7,7 @@ export interface Todo{
 
 export interface User {
     username:any,
-    email:any
+    email:any,
+    token?:string,
+    expiredTime?:string
 }
